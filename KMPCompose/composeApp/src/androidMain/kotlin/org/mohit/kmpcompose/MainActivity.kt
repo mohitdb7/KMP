@@ -1,8 +1,6 @@
 package org.mohit.kmpcompose
 
 import App
-import CountView
-import ProductsCompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.arkivanov.decompose.defaultComponentContext
 import com.seiko.imageloader.ImageLoader
 import com.seiko.imageloader.LocalImageLoader
 import com.seiko.imageloader.cache.memory.maxSizePercent
@@ -22,7 +21,11 @@ import com.seiko.imageloader.intercept.bitmapMemoryCacheConfig
 import com.seiko.imageloader.intercept.imageMemoryCacheConfig
 import com.seiko.imageloader.intercept.painterMemoryCacheConfig
 import com.seiko.imageloader.option.androidContext
+import network.ProductClientService
 import okio.Path.Companion.toOkioPath
+import decompose.root.DefaultRootComponent
+import decompose.root.RootContent
+import viewmodel.ProductsViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +39,11 @@ class MainActivity : ComponentActivity() {
                     Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    ProductsCompose()
+
+                    var productsViewModel = ProductsViewModel(ProductClientService())
+                    val root = DefaultRootComponent(defaultComponentContext(), productsViewModel)
+                    RootContent(root)
+//                    ProductsCompose()
                 }
             }
         }

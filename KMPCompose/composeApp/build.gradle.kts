@@ -25,6 +25,10 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
+
+            export("com.arkivanov.decompose:decompose:2.2.2-compose-experimental")
+//            export("com.arkivanov.decompose:extensions-compose-jetbrains:2.2.2-compose-experimental")
+            export("com.arkivanov.essenty:lifecycle:1.3.0")
         }
     }
     
@@ -33,9 +37,19 @@ kotlin {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.android)
+
+            // Navigation
+            implementation("com.arkivanov.decompose:decompose:2.2.2-compose-experimental")
+            implementation("com.arkivanov.decompose:extensions-compose-jetbrains:2.2.2-compose-experimental")
+            // Add the dependency, typically under the commonMain source set
+
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+
+            api("com.arkivanov.decompose:decompose:2.2.2-compose-experimental")
+//            api("com.arkivanov.decompose:extensions-compose-jetbrains:2.2.2-compose-experimental")
+            api("com.arkivanov.essenty:lifecycle:1.3.0")
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -52,7 +66,11 @@ kotlin {
             implementation(libs.bundles.ktor)
             implementation(libs.mvvm.core)
             implementation(libs.image.loader)
-//            implementation(libs.androidx.material3)
+
+            // Navigation
+            implementation("com.arkivanov.decompose:decompose:2.2.2-compose-experimental")
+            implementation("com.arkivanov.decompose:extensions-compose-jetbrains:2.2.2-compose-experimental")
+            implementation(compose.material3)
         }
     }
 }

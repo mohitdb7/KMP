@@ -1,3 +1,5 @@
+package decompose.list
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -13,7 +15,6 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
@@ -25,12 +26,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SearchBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -41,28 +41,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import com.seiko.imageloader.rememberImagePainter
-import network.ProductClientService
-import org.jetbrains.compose.resources.ExperimentalResourceApi
-import viewmodel.ProductsViewModel
-
+import model.ProductsParentModelItem
 
 @Composable
-fun ProductsCompose() {
-    MaterialTheme {
-        ProductComponent(
-            productViewModel = ProductsViewModel(
-            productService = ProductClientService()
-            )
-        )
+fun ListContent(
+    component: ListComponent
+) {
+    val products = component.model.subscribeAsState()
+    ProductListContent(products) {
+        component.onItemClicked(it)
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductComponent(productViewModel: ProductsViewModel) {
-    val products = productViewModel.products.collectAsState()
-
+fun ProductListContent(products: State<ListComponent.Model>, onItemClick: (ProductsParentModelItem) -> Unit) {
     var searchText by remember { mutableStateOf("") }
     var isSearchActive by remember { mutableStateOf(false) }
     var searchHistory = remember { mutableStateListOf("dummy") }
@@ -123,21 +118,23 @@ fun ProductComponent(productViewModel: ProductsViewModel) {
                         })
                     }
                 }) {
-                    searchHistory.forEach { text ->
-                        Row(modifier = Modifier.fillMaxWidth().padding(14.dp)) {
-                            Icon(Icons.Default.Search, contentDescription = "Search history")
-                            Text(text)
-                        }
+                searchHistory.forEach { text ->
+                    Row(modifier = Modifier.fillMaxWidth().padding(14.dp)) {
+                        Icon(Icons.Default.Search, contentDescription = "Search history")
+                        Text(text)
                     }
+                }
             }
 
             LazyVerticalGrid(columns = GridCells.Fixed(cols),
                 state = scrollState,
                 contentPadding = PaddingValues(16.dp)
             ) {
-                items(products.value, key = { product -> product.id.toString() }) {product ->
+                items(products.value.items, key = { product -> product.id.toString() }) {product ->
                     Card(shape = RoundedCornerShape(15.dp),
-                        modifier = Modifier.padding(8.dp).fillMaxWidth(),
+                        modifier = Modifier.padding(8.dp).fillMaxWidth().clickable {
+                                                                                   onItemClick(product)
+                        },
                         elevation = 2.dp) {
                         Column(verticalArrangement = Arrangement.Center,
                             horizontalAlignment = Alignment.CenterHorizontally) {
@@ -183,5 +180,4 @@ fun ProductComponent(productViewModel: ProductsViewModel) {
             }
         }
     }
-
 }

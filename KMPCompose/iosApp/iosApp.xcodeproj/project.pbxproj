@@ -12,6 +12,7 @@
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		5B6EAE3C2B8DEED4006C0633 /* CountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6EAE3B2B8DEED4006C0633 /* CountView.swift */; };
 		5B6EAE3E2B918FA1006C0633 /* ProductsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6EAE3D2B918FA1006C0633 /* ProductsListView.swift */; };
+		5B9CEA032BBD8AEB008BB6C8 /* DecomposeProductsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9CEA022BBD8AEB008BB6C8 /* DecomposeProductsListView.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -21,6 +22,7 @@
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		5B6EAE3B2B8DEED4006C0633 /* CountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountView.swift; sourceTree = "<group>"; };
 		5B6EAE3D2B918FA1006C0633 /* ProductsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListView.swift; sourceTree = "<group>"; };
+		5B9CEA022BBD8AEB008BB6C8 /* DecomposeProductsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecomposeProductsListView.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = iosApp.app; path = KMPCompose.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 				5B6EAE3B2B8DEED4006C0633 /* CountView.swift */,
 				5B6EAE3D2B918FA1006C0633 /* ProductsListView.swift */,
+				5B9CEA022BBD8AEB008BB6C8 /* DecomposeProductsListView.swift */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B9CEA032BBD8AEB008BB6C8 /* DecomposeProductsListView.swift in Sources */,
 				5B6EAE3E2B918FA1006C0633 /* ProductsListView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,

@@ -11,14 +11,14 @@ struct ComposeView: UIViewControllerRepresentable {
 }
 
 struct ContentView: View {
+    let rootCompoenent: RootComponent
+    
     var body: some View {
         VStack {
 //            ComposeView()
 //            CountView()
-            ProductsListView()
+//            ProductsListView()
+            DecomposeProductsListView(rootCompoenent: rootCompoenent)
         }.ignoresSafeArea(.keyboard)
     }
 }
-
-
-
